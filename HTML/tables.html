@@ -6,30 +6,84 @@
    <title>Document</title>
 </head>
 <body>
+   <!-- 
+       ========================================================================
+       HTML TABLES (TABLE STRUCTURE & SEMANTICS)
+       ========================================================================
+       Tables are designed to present complex, structured, or relational data 
+       clearly in a multi-dimensional grid layout consisting of rows and columns.
+   -->
+
+   <!-- 
+       1. TABLE WRAPPER ELEMENT (<table>)
+          - PURPOSE: Declares the start of the table structure.
+          - ATTRIBUTES:
+            * "border": A legacy HTML attribute that draws lines around table boundaries.
+              - Note: Deprecated in HTML5. Modern best practice dictates removing the HTML "border" attribute and styling borders with CSS (`border`, `border-collapse`, `padding`, etc.).
+   -->
    <table border="">
+
+      <!-- 
+          2. TABLE HEAD SECTION (<thead>)
+             - PURPOSE: Groups all the header content/columns of the table.
+             - UTILITY: Helps screen readers identify structure and enables browsers/printers to repeat table headers on subsequent pages for multi-page data tables.
+      -->
       <thead>
+         <!-- 
+             3. TABLE ROW ELEMENT (<tr>)
+                - PURPOSE: Defines a horizontal row of cells within the table.
+                - CONTAINMENT: Can only contain header cells (<th>) or data cells (<td>).
+         -->
          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Mobile</th>
+            <!-- 
+                4. TABLE HEADER CELL (<th>)
+                   - PURPOSE: Represents a header cell for a column or row.
+                   - STYLING: Displays in bold text and centered alignment by default.
+                   - OPTIONAL ATTRIBUTES:
+                     * "scope": Improves screen reader accessibility by defining if a cell is a header for a column (`scope="col"`) or row (`scope="row"`).
+            -->
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Mobile</th>
          </tr>
       </thead>
+
+      <!-- 
+          5. TABLE BODY SECTION (<tbody>)
+             - PURPOSE: Groups the primary body/data rows of the table.
+             - UTILITY: Separates data rows from header (<thead>) and footer (<tfoot>) sections.
+      -->
       <tbody>
+         <!-- First Data Row -->
+         <tr>
+            <!-- 
+                6. TABLE DATA CELL (<td>)
+                   - PURPOSE: Represents a standard cell containing actual cell values.
+                   - STYLING: Displays in normal weight, left-aligned text by default.
+                   - ATTRIBUTES FOR ROW/COL MERGING (Very Important!):
+                     * "colspan": Merges multiple columns horizontally into a single cell (e.g. colspan="2").
+                     * "rowspan": Merges multiple rows vertically into a single cell (e.g. rowspan="2").
+            -->
+            <td>Satya</td>
+            <td>25</td>
+            <td>1234567890</td>
+         </tr>
+
+         <!-- Second Data Row -->
          <tr>
             <td>Satya</td>
             <td>25</td>
             <td>1234567890</td>
          </tr>
+
+         <!-- Third Data Row -->
          <tr>
             <td>Satya</td>
             <td>25</td>
             <td>1234567890</td>
          </tr>
-         <tr>
-            <td>Satya</td>
-            <td>25</td>
-            <td>1234567890</td>
-         </tr>
+
+         <!-- Fourth Data Row -->
          <tr>
             <td>Satya</td>
             <td>25</td>

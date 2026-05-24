@@ -6,20 +6,89 @@
    <title>Document</title>
 </head>
 <body>
+   <!-- 
+       ========================================================================
+       COMPREHENSIVE HTML INPUT TYPES & BLOCK VS INLINE ELEMENTS
+       ========================================================================
+       This file provides an interactive showcase of various HTML5 input controls
+       along with practical demonstrations of block-level and inline-level elements.
+   -->
+
+   <!-- 
+       1. <input type="text">:
+          - PURPOSE: Single-line input field for general textual characters.
+          - ATTRIBUTES:
+            * "placeholder": Visual guide text that disappears once the user types.
+            * "required": Browser-native validation. Form cannot be submitted unless this field is filled.
+   -->
    <input type="text" name="" id="" placeholder="Enter your name" required> 
    
+   <!-- 
+       2. <input type="email">:
+          - PURPOSE: Specialized text field for email inputs.
+          - VALIDATION: Automatically enforces standard pattern checks (e.g. requires an "@" and domain).
+   -->
    <input type="email" name="" id="" placeholder="Enter your email"><br><br>
+   
+   <!-- 
+       3. <input type="password">:
+          - PURPOSE: Obscures entries for user privacy during password submission.
+   -->
    <input type="password" name="" id="">
+
+   <!-- 
+       4. <input type="number">:
+          - PURPOSE: Formats the field exclusively for numeric inputs.
+          - BEHAVIOR: Provides spinner arrow buttons (increment/decrement) and prompts number-only keyboards on mobile screens.
+          - OPTIONAL ATTRIBUTES: "min", "max", and "step" (defines size increments, e.g., step="0.5").
+   -->
    <input type="number" name="" id=""><br>
+
+   <!-- 
+       5. <input type="date">:
+          - PURPOSE: Opens a native browser calendar date picker interface.
+          - FORMAT: Yields dates in standardized YYYY-MM-DD formats.
+   -->
    <input type="date" name="" id=""><br>
+
+   <!-- 
+       6. <input type="week">:
+          - PURPOSE: Custom date picker allowing selection of a specific week and year (e.g. "Week 20, 2026").
+   -->
    <input type="week" name="" id=""><br>
+
+   <!-- 
+       7. <input type="month">:
+          - PURPOSE: Custom date picker allowing selection of a specific month and year (e.g. "May 2026").
+   -->
    <input type="month"><br>
 
+   <!-- 
+       8. <input type="range">:
+          - PURPOSE: Renders a slider control, allowing users to select an approximate value along a slide track.
+          - KEY ATTRIBUTES: Bounded using "min" (Default: 0) and "max" (Default: 100) properties.
+   -->
    <input type="range" name="" id=""><div class="d-none d-sm-block">
       
    </div>
+
+   <!-- 
+       9. <input type="checkbox">:
+          - PURPOSE: Generates a small square checkbox toggle box.
+          - BEHAVIOR: Allows selecting single or multiple independent choices.
+          - STATE: Uses the "checked" boolean attribute to set default active selection.
+   -->
    <input type="checkbox" name="" id="">Agree to terms and Conditions
 
+   <!-- 
+       10. SELECT DROPDOWN LIST (<select> & <option>):
+          - PURPOSE: Renders a drop-down menu of choices.
+          - Wrapper <select>: Defines the actual dropdown container.
+          - Option Items <option>: Contains individual selection choices.
+          - Attributes:
+            * "value": The actual data value transmitted to the server when selected.
+            * "selected": A boolean attribute to define the default pre-selected option.
+   -->
    <select name="" id="">
       <option value="age">Gender</option>
       <option value="male">Male</option>
@@ -27,6 +96,24 @@
       <option value="other">Other</option>
    </select>
   
+   <!-- 
+       ========================================================================
+       11. DISPLAY TYPES: BLOCK-LEVEL VS INLINE-LEVEL ELEMENTS
+       ========================================================================
+       - BLOCK-LEVEL ELEMENTS:
+         * EXAMPLES: <h1>, <p>, <div>, <section>, <ul>.
+         * BEHAVIOR: 
+           - They always start on a new line.
+           - They automatically stretch horizontally to occupy the full width of their parent container.
+           - Respect top/bottom margins and paddings.
+         
+       - INLINE-LEVEL ELEMENTS:
+         * EXAMPLES: <span>, <a>, <strong>, <em>, <img>, <input>, <select>.
+         * BEHAVIOR:
+           - They do not start on a new line; they flow along with surrounding content.
+           - They only take up as much width as their content size requires.
+           - Do not respect top/bottom margins (though horizontal margins/paddings work).
+   -->
    <!-- <h1>Satya</h1> 
    <h1>Satya</h1>
    
@@ -34,5 +121,4 @@
     <span>Pratyush</span> <span>Shubham</span> -->
    
 </body>
-
 </html>

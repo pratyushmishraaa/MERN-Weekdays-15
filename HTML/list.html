@@ -6,29 +6,115 @@
    <title>Document</title>
 </head>
 <body>
+   <!-- 
+       ========================================================================
+       HTML LISTS & MULTIMEDIA
+       ========================================================================
+       This file demonstrates structural lists (unordered, ordered, description)
+       and interactive media integration (images, video, and audio).
+   -->
+
    <h1>List</h1>
+
+   <!-- 
+       ========================================================================
+       1. UNORDERED LISTS (<ul>)
+       ========================================================================
+       - PURPOSE: Defines a list of items where order is not semantically important (rendered as bullets).
+       - CHILDREN: Must contain only <li> (List Item) elements.
+       - ATTRIBUTES:
+         * "type": Used to specify the bullet symbol. Common values are:
+           - "disc" (Default solid circle)
+           - "circle" (Hollow circle)
+           - "square" (Solid square)
+           - "none" (Removes bullets entirely)
+       - BEST PRACTICE: The "type" attribute is deprecated in modern HTML; styling should be handled via the CSS property 'list-style-type'.
+   -->
    <!-- <ul type="square">
       <li>HTML</li>
       <li>CSS</li>
       <li>JavaScript</li>
-   </ul>
+   </ul> -->
 
-   <ol start ="2">
+   <!-- 
+       ========================================================================
+       2. ORDERED LISTS (<ol>)
+       ========================================================================
+       - PURPOSE: Defines a list of items that have a sequential or numerical order (rendered with numbers/letters).
+       - CHILDREN: Must contain only <li> (List Item) elements.
+       - KEY ATTRIBUTES:
+         * "start": Specifies the start value of the ordered list (e.g., start="2" starts numbering from 2).
+         * "type": Defines the numbering style:
+           - "1" (Default numbers: 1, 2, 3...)
+           - "a" / "A" (Lowercase/Uppercase letters)
+           - "i" / "I" (Lowercase/Uppercase Roman numerals)
+         * "reversed": A boolean attribute that reverses the list order (e.g., 3, 2, 1).
+   -->
+   <!-- <ol start ="2">
       <li>HTML</li>
       <li>CSS</li>
       <li>JavaScript</li>
-   </ol>
+   </ol> -->
 
-   <dl>
+   <!-- 
+       ========================================================================
+       3. DESCRIPTION LISTS (<dl>)
+       ========================================================================
+       - PURPOSE: Used to group terms (keys) and definitions (values). Excellent for glossaries, metadata profiles, or key-value structures.
+       - INNER ELEMENTS:
+         * <dl> (Description List): The wrapper container.
+         * <dt> (Description Term): The item or phrase being defined (bolded or plain by default).
+         * <dd> (Description Details): The definition, description, or value of the term (indented by default).
+       - DETAIL: Multiple terms <dt> can be associated with a single description <dd>, or a single <dt> can have multiple <dd> elements.
+   -->
+   <!-- <dl>
       <dt>HTML</dt>
       <dd>Hypertext Markup Language</dd>
-      
    </dl> -->
 
+   <!-- 
+       ========================================================================
+       4. HTML IMAGE ELEMENT (<img>)
+       ========================================================================
+       - PURPOSE: Embeds an image in a web page.
+       - TYPE: It is an empty/void element, meaning it does not have a closing tag.
+       - KEY ATTRIBUTES:
+         * "src" (Source): The absolute or relative path to the image file.
+         * "alt" (Alternative Text): Describes the image content. Critical for:
+           - Accessibility: Read by screen readers for visually impaired users.
+           - Broken Links: Displayed if the image fails to load.
+           - SEO: Used by search engines to understand image context.
+         * "width" / "height": Defines display dimensions (e.g., "300px" or percentage). Recommended to prevent layout shifts.
+   -->
    <!-- <img src="https://images.pexels.com/photos/34978292/pexels-photo-34978292.jpeg" alt="A man pulling bag" width="300px"> -->
 
+   <!-- 
+       ========================================================================
+       5. HTML5 VIDEO ELEMENT (<video>)
+       ========================================================================
+       - PURPOSE: Embeds video media in the page.
+       - KEY ATTRIBUTES:
+         * "src": Direct link/path to the video file.
+         * "controls": Essential to render the default play, pause, volume, and fullscreen buttons.
+         * "width" / "height": Visual boundary dimensions.
+         * "autoplay": Starts playing immediately. Note: Modern browsers block autoplay unless the video is also muted!
+         * "muted": Mutes the audio output by default.
+         * "loop": Replays the video automatically once it ends.
+         * "poster": Specifies an image to show while the video is downloading or until the user clicks play.
+   -->
    <!-- <video width="300px" controls = "auto-play muted loop " src="https://www.pexels.com/download/video/8581281/"></video> -->
 
+   <!-- 
+       ========================================================================
+       6. HTML5 AUDIO ELEMENT (<audio>)
+       ========================================================================
+       - PURPOSE: Embeds audio tracks/streams in the page.
+       - KEY ATTRIBUTES:
+         * "src": Source URL of the audio file.
+         * "controls": Displays standard audio playback interface controls (play/pause, timeline, volume).
+         * "autoplay" / "loop" / "muted": Function similarly to their video counterpart attributes.
+       - COMPATIBILITY NOTE: Multiple source elements `<source>` can be placed inside `<audio>` or `<video>` to provide fallback formats (e.g., MP3 vs OGG) for wider browser support.
+   -->
    <!-- <audio controls src=""></audio> -->
 
 </body>

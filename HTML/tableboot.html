@@ -4,12 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bootstrap Site</title>
+  
+  <!-- 
+      ===========================================================================
+      BOOTSTRAP INTEGRATION VIA CDN (Content Delivery Network)
+      ===========================================================================
+      - PURPOSE: CDNs serve common libraries from highly optimized, geographically 
+        distributed servers to reduce latency and load speed.
+      
+      1. BOOTSTRAP STYLESHEET (<link>)
+         - href: Directs the browser to load Bootstrap's compiled CSS file (v5.0.0-alpha1).
+         - integrity: A cryptographic hash (Subresource Integrity - SRI) ensuring the 
+           delivered file hasn't been altered or injected with malicious code.
+         - crossorigin: Standard CORS policy instruction for fetching cross-origin files.
+  -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  
+  <!-- 
+      2. POPPER.JS DEPENDENCY (<script>)
+         - PURPOSE: A library used by Bootstrap to calculate and position dynamic 
+           popups, tooltips, dropdowns, and popovers dynamically.
+         - SEQUENCE: Must be loaded before Bootstrap's JS file.
+  -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  
+  <!-- 
+      3. BOOTSTRAP JAVASCRIPT BUNDLE (<script>)
+         - PURPOSE: Contains JavaScript logic to activate responsive components (e.g. 
+           interactive accordions, modals, navigation bars, alerts, etc.).
+  -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
+   <!-- 
+       ===========================================================================
+       BOOTSTRAP GRID SYSTEM & COMPONENT LAYOUT
+       ===========================================================================
+   -->
+
+   <!-- 
+       4. CONTAINER UTILITY (.container)
+          - PURPOSE: The foundational layout element of Bootstrap.
+          - BEHAVIOR: 
+            * Centers the inner content horizontally on the screen.
+            * Applies responsive padding/margins on the left and right sides.
+            * Establishes a responsive max-width boundary across various responsive breakpoints (sm, md, lg, xl, xxl).
+          - VARIANT ALTERNATIVE: Use `.container-fluid` for a full-width container stretching 100% across the viewport width at all breakpoints.
+   -->
    <div class="container">
+      
+       <!-- 
+           5. BOOTSTRAP TABLES (.table)
+              - PURPOSE: Enhances basic HTML <table> elements with elegant styling, paddings, borders, and premium typography.
+              - POPULAR COMPLEMENTARY BOOTSTRAP TABLE CLASSES:
+                * `.table-striped`: Alternates background rows (zebra-striping) for high readability.
+                * `.table-hover`: Adds a subtle hover state/background change when the mouse pointer glides over table rows.
+                * `.table-bordered`: Draws borders on all cells and sides.
+                * `.table-borderless`: Removes all borders from the table.
+                * `.table-responsive`: Makes tables scrollable horizontally on smaller mobile viewports.
+       -->
        <table class=" table " >
       <thead>
          <tr>
@@ -19,21 +72,46 @@
          </tr>
       </thead>
       <tbody>
+         <!-- 
+             6. ROW HIGHLIGHTING VIA CONTEXTUAL CLASS (.table-active)
+                - PURPOSE: Applies a dark grey/muted active highlight background to represent selected rows or current data focus.
+         -->
          <tr class="table-active">
             <td>Satya</td>
             <td>25</td>
             <td>1234567890</td>
          </tr>
+
+         <!-- 
+             7. CONTEXTUAL COLOR ROWS (.table-danger)
+                - PURPOSE: Applies a soft pink/red danger alert color to the row background. 
+                - CONTEXT: Great for displaying errors, deleted records, or high-urgency notifications.
+                - OTHER CLASS VARIANT OPTIONS: 
+                  * `.table-primary` (Blue / default focus)
+                  * `.table-secondary` (Grey)
+                  * `.table-success` (Green / success)
+                  * `.table-warning` (Yellow / warning alert)
+                  * `.table-info` (Teal / general info)
+                  * `.table-light` (Light grey)
+                  * `.table-dark` (Dark slate/black)
+         -->
          <tr class="table-danger">
             <td>Satya</td>
             <td>25</td>
             <td>1234567890</td>
          </tr>
+
          <tr>
+            <!-- 
+                8. CELL UTILITY BACKGROUND COLOR (.bg-danger)
+                   - PURPOSE: Directly forces a bright, vibrant, solid red color onto this specific cell background.
+                   - NOTE: Unlike `.table-danger` (which uses a soft, semi-transparent background custom tailored for tables), utility classes like `.bg-danger` apply solid, high-contrast colors which might override table-specific borders or text contrasts.
+            -->
             <td class="bg-danger">Satya</td>
             <td>25</td>
             <td>1234567890</td>
          </tr>
+         
          <tr>
             <td>Satya</td>
             <td>25</td>

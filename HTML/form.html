@@ -6,14 +6,78 @@
    <title>Document</title>
 </head>
 <body>
+   <!-- 
+       ========================================================================
+       HTML FORMS & STRUCTURAL CONTROLS
+       ========================================================================
+       Forms are used to capture, structure, and submit user data to a server.
+   -->
+
+   <!-- 
+       ========================================================================
+       1. FORM ELEMENT WRAPPER (<form>)
+       ========================================================================
+       - PURPOSE: Container for all interactive input controls.
+       - KEY ATTRIBUTES:
+         * "action": Specifies the destination URL where form data is sent on submit.
+         * "method": The HTTP protocol method used to transmit data:
+           - "GET": Appends form data to the URL as key/value pairs (query string). 
+             * Visibility: Visible in the browser address bar.
+             * Security: Non-secure. Do not use for passwords or sensitive data.
+             * Length: Limited by URL size constraints.
+             * Caching: Can be bookmarked and cached.
+           - "POST": Sends form data inside the HTTP request body.
+             * Visibility: Hidden from the URL bar.
+             * Security: More secure (though SSL/HTTPS is still required for encryption).
+             * Length: No payload size limit.
+             * Caching: Cannot be bookmarked or cached.
+   -->
    <!-- <form action="./tableboot.html" method="POST">
-      <input type="text" name="name" id="" placeholder="Enter your name"><br><br>
-      <input type="email" name="email" id="" placeholder="Enter your email"><br><br><br>
-      <input type="password" name="password" id=""><br><br>
-      <input type="submit" value="Submit">
+       ========================================================================
+       INPUT TYPES (BASIC)
+       ========================================================================
+       - Each input should have a "name" attribute. The "name" acts as the key 
+         identifying the data when submitted to a back-end server.
+       - "placeholder": Provides a temporary greyed-out visual hint.
+       - "id": Used to link the input directly to standard CSS/JS or a <label>.
+   -->
+   <!-- 
+       * type="text": Standard string input.
+   -->
+   <!-- <input type="text" name="name" id="" placeholder="Enter your name"><br><br> -->
+   
+   <!-- 
+       * type="email": Restricts input to valid email formats. Shows email-optimized keyboards on mobile.
+   -->
+   <!-- <input type="email" name="email" id="" placeholder="Enter your email"><br><br><br> -->
+   
+   <!-- 
+       * type="password": Masks the typed characters (usually replacing them with dots or asterisks) for privacy.
+   -->
+   <!-- <input type="password" name="password" id=""><br><br> -->
+   
+   <!-- 
+       * type="submit": Generates a button that automatically triggers form submission.
+   -->
+   <!-- <input type="submit" value="Submit">
 
    </form> -->
 
+   <!-- 
+       ========================================================================
+       2. SEMANTIC FORM GROUPING (<fieldset>, <legend>, <label>)
+       ========================================================================
+       - <fieldset>:
+         * PURPOSE: Groups related data fields inside a form.
+         * DISPLAY: Usually draws a thin border outline around grouped fields.
+       - <legend>:
+         * PURPOSE: Serves as the visual caption and semantic header for the <fieldset>.
+         * ACCESSIBILITY: Read by screen readers when navigating between fields in the group.
+       - <label>:
+         * PURPOSE: Associates text descriptions directly with input controls.
+         * ATTRIBUTE "for": Binds the label to an input's "id" (e.g., <label for="email"> goes with <input id="email">).
+         * A11Y VALUE: Screen readers read labels aloud when the input is focused. Also increases the clickable area: clicking the label text focuses or checks the associated input.
+   -->
    <!-- <form action="">
 
       <fieldset>
@@ -34,17 +98,23 @@
          </fieldset>
          <input type="submit" value="Submit">
       </fieldset>
-   </form>
+   </form> -->
    
-    -->
-
-    <!-- <a href="https://www.geeksforgeeks.org/html/how-to-use-mailto-in-html/" target="_blank">Click here to open gfg article of MAil to</a> -->
-    
-
-
-
-
-
+   <!-- 
+       ========================================================================
+       3. ANCHOR HYPERLINKS & MAILTO PATHS (<a>)
+       ========================================================================
+       - PURPOSE: Defines an anchor hyperlink to navigate to another page or location.
+       - KEY ATTRIBUTES:
+         * "href" (Hypertext Reference): Holds the URL or path being targeted.
+         * "target": Tells the browser where to open the link:
+           - "_self" (Default): Opens the link in the same window/tab.
+           - "_blank": Opens the link in a brand new browser window or tab.
+       - MAILTO PROTOCOL:
+         * SYNTAX: href="mailto:someone@example.com?subject=Hello"
+         * PURPOSE: Tells the operating system/browser to launch the default email client (e.g. Outlook, Mail, Gmail) to compose a message pre-populated with the specified email address, subject, or body parameters.
+   -->
+   <!-- <a href="https://www.geeksforgeeks.org/html/how-to-use-mailto-in-html/" target="_blank">Click here to open gfg article of MAil to</a> -->
    
 </body>
 </html>

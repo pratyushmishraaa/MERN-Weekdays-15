@@ -1,11 +1,69 @@
 <!DOCTYPE html>
+<!-- 
+    ===========================================================================
+    HTML DOCUMENT STRUCTURE & BASIC FORMATTING NOTES
+    ===========================================================================
+    
+    1. <!DOCTYPE html>
+       - PURPOSE: It is an instruction to the web browser about the version of HTML the page is written in.
+       - DETAIL: In modern web design, "html" denotes HTML5. It ensures the browser renders the page in "standards mode" rather than "quirks mode" (which is used for legacy pages).
+       - CASE SENSITIVITY: It is case-insensitive, but <!DOCTYPE html> is the standard convention.
+
+    2. <html lang="en">
+       - PURPOSE: The root element of an HTML document. All other elements must be descendants of this element.
+       - ATTRIBUTE "lang": Specifies the primary language of the document's text (e.g., "en" for English, "es" for Spanish).
+       - ACCESSIBILITY (a11y): Vital for screen readers to pronounce words correctly.
+       - SEO: Helps search engines categorize and serve language-specific search results.
+-->
 <html lang="en">
 <head>
+   <!-- 
+       ========================================================================
+       METADATA & HEAD SECTION
+       ========================================================================
+       - The <head> contains machine-readable information (metadata) about the document, such as its title, scripts, and stylesheets.
+   -->
+   
+   <!-- 
+       3. <meta charset="UTF-8">
+          - PURPOSE: Declares the character encoding for the HTML document.
+          - DETAIL: UTF-8 (Unicode Transformation Format - 8-bit) is the universal character encoding that supports almost all characters, punctuation, and symbols from all written languages in the world.
+          - BEST PRACTICE: Should always be placed as the first tag inside <head> to prevent encoding vulnerabilities.
+   -->
    <meta charset="UTF-8">
+
+   <!-- 
+       4. <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          - PURPOSE: Controls how the page is displayed on mobile devices (Responsive Design).
+          - ATTRIBUTES:
+            * name="viewport": Identifies this meta tag's function to the browser.
+            * content="width=device-width": Sets the page width to follow the screen-width of the device.
+            * initial-scale=1.0: Sets the initial zoom level when the page is first loaded by the browser.
+   -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- 
+       5. <title>
+          - PURPOSE: Defines the title of the document.
+          - IMPACT:
+            * Browser: Shown in the browser's title bar, tab, or history.
+            * SEO: Extremely critical for search engines as it forms the main clickable link on Search Engine Results Pages (SERPs).
+            * Bookmarks: Serves as the default name when a user saves a bookmark.
+   -->
    <title>Document</title>
 </head>
 <body>
+   <!-- 
+       ========================================================================
+       HEADING TAGS (<h1> to <h6>)
+       ========================================================================
+       - PURPOSE: Used to define HTML headings.
+       - HIERARCHY: Ranges from <h1> (most important / highest level) to <h6> (least important / lowest level).
+       - SEO & SEMANTICS:
+         * Search engine crawlers use headings to understand the structure and topic hierarchy of the page.
+         * BEST PRACTICE: Use only one <h1> per page to represent the main title. Do not skip heading levels (e.g., jumping from <h1> directly to <h3>).
+         * STYLING note: Do not use heading tags simply to make text big or bold. Use CSS for styling, and headings for structural meaning.
+   -->
    <!-- <h1>This is heading</h1>
    <h2>This is heading</h2>
    <h3>This is heading</h3>
@@ -13,21 +71,75 @@
    <h5>This is heading</h5>
    <h6>This is heading</h6> -->
 
+   <!-- 
+       ========================================================================
+       PARAGRAPH TAG (<p>)
+       ========================================================================
+       - PURPOSE: Defines a block of paragraph text.
+       - DISPLAY: Browsers automatically add a margin (empty space) before and after a <p> element to separate it visually from surrounding blocks.
+       - CATEGORY: It is a block-level element.
+   -->
    <p>this is paragraph</p>
    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore iste nostrum explicabo, nam saepe nesciunt dignissimos mollitia vitae enim vel, facere quaerat, quidem doloremque. Nesciunt, ea?</p>
+
+   <!-- 
+       ========================================================================
+       BOLD VS STRONG FORMATTING
+       ========================================================================
+       - <b> (Bold):
+         * PURPOSE: Physically styles text as bold to draw attention, without adding any extra semantic importance or emphasis.
+         * USE CASE: Styling product names, key terms, or action items where extra voice stress is not needed.
+       - <strong> (Strong Importance):
+         * PURPOSE: Indicates that the text is of strong semantic importance, seriousness, or urgency.
+         * ACCESSIBILITY: Screen readers will typically read this text with a different tone or emphasis.
+         * BEST PRACTICE: Prefer <strong> over <b> when the text is genuinely important to the context.
+   -->
    <p>Satya <b>Shubham</b></p>
    <p>Satya <strong>Shubham</strong></p>
+
+   <!-- 
+       ========================================================================
+       ITALIC VS EMPHASIZED FORMATTING
+       ========================================================================
+       - <i> (Italic):
+         * PURPOSE: Physically styles text in italics (slanted), without indicating any extra semantic stress or emphasis.
+         * USE CASE: Technical terms, taxonomic names, idiomatic phrases, thoughts, or ship names.
+       - <em> (Emphasized):
+         * PURPOSE: Semantically stresses/emphasizes a word or phrase, indicating that it changes the meaning of the sentence when read.
+         * ACCESSIBILITY: Screen readers pronounce emphasized words with verbal stress.
+         * BEST PRACTICE: Use <em> when the emphasis changes how the sentence is understood.
+   -->
    <p><i>Hello</i></p>
    <p><em>Hello</em></p>
 
+   <!-- 
+       ========================================================================
+       HIGHLIGHTED & DELETED TEXT TAGS
+       ========================================================================
+       - <mark> (Marked / Highlighted):
+         * PURPOSE: Represents text marked or highlighted for reference purposes, typically indicating relevance in a specific context (e.g., showing search query matches).
+         * STYLE: Displays with a bright yellow background by default.
+       - <del> (Deleted):
+         * PURPOSE: Represents text that has been deleted from a document.
+         * STYLE: Displays with a line struck through the text (strikethrough) by default.
+         * RELATION: Often used alongside the <ins> (inserted) tag to show revisions or edits in document version histories.
+   -->
    <p>Pratyush <mark>Mishra</mark></p>
    <p>Vikas <del>thakur</del></p>
 
+   <!-- 
+       ========================================================================
+       SUPERSCRIPT & SUBSCRIPT TAGS
+       ========================================================================
+       - <sup> (Superscript):
+         * PURPOSE: Renders text slightly above the normal baseline, using a smaller font size.
+         * COMMON USE CASES: Mathematical exponents (e.g., x²), ordinal numbers (e.g., 1st, 2nd), or footnote references.
+       - <sub> (Subscript):
+         * PURPOSE: Renders text slightly below the normal baseline, using a smaller font size.
+         * COMMON USE CASES: Chemical formulas (e.g., H₂O, CO₂) or mathematical indexing.
+   -->
    <p>Akash <sup>Kumar</sup></p>
    <p>Akash <sub>Kumar</sub></p>
-
-
-
 
 </body>
 </html>
