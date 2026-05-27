@@ -1,0 +1,27 @@
+/* IN-DEPTH SELECTOR PRACTICE
+	This file contains examples and notes for common selectors and combinators.
+
+	1) Type selector
+		p { color: blue; }
+
+	2) Class selector
+		.card { padding: 16px; background: #fff; }
+
+	3) ID selector (higher specificity)
+		#hero { font-size: 2rem; }
+
+	4) Attribute selector
+		a[target="_blank"] { text-decoration: underline; }
+
+	5) Child vs descendant
+		/* direct child */ div > p { margin-top: 8px; }
+		/* any descendant */ div p { color: teal; }
+
+	6) Pseudo-classes & pseudo-elements
+		a:hover { opacity: 0.8; }
+		p::first-line { font-weight: bold; }
+
+	Exercises:
+	- Create markup in HTML and try each rule to see which elements are matched.
+	- Combine selectors (e.g., `.card > p:first-child`) to target specific elements.
+*/

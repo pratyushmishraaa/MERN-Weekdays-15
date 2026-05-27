@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+      <!-- IN-DEPTH NOTES (Fonts & Performance)
+         Purpose: Demonstrates how to load and apply a Google Font and why
+         `preconnect` helps performance.
+
+         Key points:
+         - Use the link provided by Google Fonts to import the font.
+         - `font-family` accepts a prioritized list; always include web-safe fallbacks.
+         - `preconnect` hints let the browser open early connections to font hosts,
+         reducing latency.
+
+         Accessibility & performance:
+         - Avoid loading many font weights/styles; prefer 1–2 weights for most pages.
+         - Consider `font-display: swap` to reduce invisible text during font load.
+
+         Exercises:
+         1) Replace the Google Fonts link with a different family and apply it.
+         2) Try adding `font-display=swap` to the Google URL and observe FOUT behavior.
+      -->
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>

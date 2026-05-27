@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <!-- IN-DEPTH NOTES (Selectors & Specificity)
+        Purpose: Practice CSS selectors and pseudo-classes. This file contains
+        commented examples for common selectors and combinators.
+
+        Examples to try and learn:
+        - Type selector: `h3 {}` targets all <h3> elements.
+        - ID selector: `#one {}` targets the element with id="one" (high specificity).
+        - Class selector: `.two {}` reusable across elements.
+        - Grouping: `h3, p {}` applies same rules to both selectors.
+        - Descendant & child: `div p {}` vs `div > p {}` (direct child only).
+        - nth-child: `div p:nth-child(5)` targets the 5th child element inside the div.
+        - Pseudo-class :hover: `#name:hover {}` triggers when the mouse is over element.
+
+        Experiments:
+        1) Uncomment various blocks to see how specificity and cascade interact.
+        2) Create two rules that target the same element with different selectors
+           and predict which wins before testing.
+
+        Tip:
+        - Use the browser inspector to see which CSS rule is applied and why.
+   -->
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>

@@ -1,7 +1,25 @@
-```css
+/* IN-DEPTH: `style.css` — Utility & component helper classes
+  Purpose: A collection of small, reusable CSS classes (utilities) that can
+  speed up prototyping. This file includes spacing, layout, colors,
+  typography, and small components (buttons, cards).
+
+  How to use:
+  - Apply single-purpose classes to elements (e.g., <div class="p-2 bg-white">).
+  - Combine classes to compose design (e.g., `card p-2 rounded shadow`).
+
+  Advantages:
+  - Faster prototyping, avoid writing custom CSS for one-off styles.
+  - Predictable small building blocks are easy for beginners to mix.
+
+  Tradeoffs:
+  - HTML can become class-heavy; consider components for production projects.
+
+  Exercise:
+  - Build a small card using `.card`, `.p-2`, `.rounded`, and `.shadow`.
+*/
 /* =========================
-   500 Lines Demo CSS Code
-   ========================= */
+  500 Lines Demo CSS Code
+  ========================= */
 
 /* 1 */
 *{

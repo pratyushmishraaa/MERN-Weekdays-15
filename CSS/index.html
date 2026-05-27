@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- IN-DEPTH NOTES (CSS Sources & Specificity)
+            Purpose: Demonstrates three methods of providing CSS and how conflicts
+            are resolved using specificity and the cascade.
+
+            Key ideas:
+            - Inline styles (on element) have the highest specificity and usually win.
+            - Internal styles (in <style>) are stronger than external styles loaded
+               earlier, but later rules can override earlier ones (cascade order).
+            - External stylesheets are preferred for maintainability and caching.
+
+            Specificity order (simplified):
+               Inline style > ID selectors > Class/attribute/pseudo-class selectors > Type selectors
+
+            Exercises:
+            1) Move the `<link rel="stylesheet" href="style3.css">` below the
+                internal `<style>` tag and observe which color wins.
+            2) Add an `id` selector in `style3.css` and compare specificity.
+
+            Best practices:
+            - Use external stylesheets for site-wide styles.
+            - Minimize inline styles; prefer utility classes or component-specific classes.
+    -->
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
@@ -17,10 +39,17 @@
    <!-- <link rel="stylesheet" href="style2.css"> -->
    <!-- <script src="app.js"></script> -->
 
+
+    
+
+
 </head>
 <body>
    <!-- <h1>Satya</h1> -->
 <h1 style="color: blue;" >Pratyush</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+<h2>Shubham</h2>
+
    
 </body>
 </html>

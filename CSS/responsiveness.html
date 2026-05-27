@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IN-DEPTH NOTES (Responsive Design & Media Queries)
+            Purpose: Shows a simple `@media` query that adapts image size and shape
+            based on device orientation.
+
+            Key points:
+            - `@media` rules apply only when their conditions match (width, height,
+               orientation, resolution, etc.).
+            - Mobile-first approach: write base styles for small screens, then use
+               min-width media queries to add rules for larger screens.
+
+            Example here:
+            - By default the image is 600×600. When the device is landscape the
+               image becomes smaller and circular (border-radius: 50%).
+
+            Exercises:
+            1) Change the `@media` to `@media (max-width: 600px)` and test with
+                a narrow browser window to practice mobile-first rules.
+            2) Add a `@media (prefers-reduced-motion: reduce)` rule to disable
+                animations for users who prefer reduced motion.
+
+            Accessibility note:
+            - Respect `prefers-reduced-motion` and maintain legible font sizes.
+    -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      img{
+         width: 600px;
+         height: 600px;
+      }
+      @media (orientation:landscape){
+         img{
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+         }
+      }
+   </style>
+</head>
+<body>
+   <img src="https://images.pexels.com/photos/25381396/pexels-photo-25381396.jpeg" alt="">
+   
+</body>
+</html>

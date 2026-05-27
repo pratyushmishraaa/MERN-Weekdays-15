@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- IN-DEPTH NOTES (CSS Units)
+         Purpose: Demonstrate core CSS units and when to use them.
+
+         Unit categories:
+         - Absolute: `px` — fixed on-screen pixels, predictable but not responsive.
+         - Relative to root: `rem` — relative to root font-size (useful for consistent scaling).
+         - Relative to parent: `em` — relative to the computed font-size of its parent.
+         - Percent `%` — relative to the parent box dimension (width/height).
+         - Viewport units: `vh` / `vw` — relative to viewport height/width (useful for full-screen sections).
+
+         Examples & guidance:
+         - Use `rem` for font-sizes to allow site-wide scaling via `html { font-size }`.
+         - Use `%` for fluid widths within containers; avoid mixing % heights unless parent has explicit height.
+         - Prefer `vh`/`vw` for hero sections that should fill the screen.
+
+         Exercises:
+         1) Set `html { font-size: 10px }` and compute `4rem` in pixels.
+         2) Make `.child { width: 50% }` while changing parent widths to see fluid layout.
+      -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      .html{
+         /* font-size: 32px; */
+
+      }
+      .parent{
+         /* height: 400px; */
+         /* width: 400px; */
+         height: 100vh;
+         width: 100vw;
+         background-color: beige;
+         /* font-size: 40px; */
+         
+      }
+      .child{
+         height:50%;
+      width: 50%;
+      background-color: red;
+      }
+      h1{
+         font-size: 4rem;
+      }
+      h2{
+         /* font-size: 6em; */
+      }
+     
+      
+   </style>
+</head>
+<body>
+   <div class="parent">
+      <!-- <div class="child"></div> -->
+       <h1>Pratyush Mishra</h1>
+       <h2>Shubham</h2>
+        
+       <p>Satya</p>
+   </div>
+   
+</body>
+</html>

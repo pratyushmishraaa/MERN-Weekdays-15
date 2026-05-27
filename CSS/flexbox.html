@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- IN-DEPTH NOTES (Flexbox)
+        Purpose: Demonstrates flexible box layout for arranging items in a row
+        or column and controlling alignment and distribution.
+
+        Core concepts:
+        - `display: flex` turns a container into a flex formatting context.
+        - Main axis vs cross axis: depends on `flex-direction` (row or column).
+        - `justify-content` aligns along the main axis (start, center, space-between).
+        - `align-items` aligns along the cross axis (stretch, center, flex-start).
+        - Flex item properties: `flex-grow`, `flex-shrink`, `flex-basis`, and `order`.
+
+        Practical walkthrough:
+        - In this example `.container` centers items both horizontally and vertically
+          using `justify-content: center` and `align-items: center`.
+        - `.child2 { flex-shrink: 2 }` makes that item shrink faster when space is limited.
+
+        Exercises:
+        1) Change `flex-direction` to `column` and observe axis changes.
+        2) Add `flex-grow: 1` to `.child1` and `.child3` while keeping `.child2`
+           fixed to create elastic layouts.
+        3) Use `flex-wrap: wrap` and resize the window to see wrapping behavior.
+
+        Common layout patterns:
+        - Horizontal nav bars, equal-height columns, simple responsive cards.
+
+        Debugging tip:
+        - Use browser devtools to toggle `display:flex` and inspect computed axes.
+   -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         
+      }
+      .container{
+         height: 100vh;
+         width: 100vw;
+         background-color: lightblue;
+         display: flex;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        justify-content: center;
+        align-items: center;
+        /* flex-wrap: wrap-reverse; */
+
+      }
+      .child{
+         height: 100px;
+         width: 100px;
+         background-color: lightcoral;
+         margin: 10px;
+      }
+      .child2{
+         /* align-self: flex-end; */
+         /* order: -1; */
+         /* flex-basis: 200px; */
+         /* flex-grow: 2; */
+         flex-shrink: 2;
+      }
+      /* .child3{
+         order: 0;
+      }
+      .child1{
+         order: 1;
+      } */
+
+   </style>
+</head>
+<body>
+   <div class="container">
+      <div class="child child1">Item1</div>
+      <div class="child child2">Item2</div>
+      <div class="child child3">Item3</div>
+      
+     
+      
+      
+      
+   </div>
+   
+</body>
+</html>

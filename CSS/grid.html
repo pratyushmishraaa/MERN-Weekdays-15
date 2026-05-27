@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- IN-DEPTH NOTES (CSS Grid)
+         Purpose: Shows CSS Grid features: defining columns/rows, named areas,
+         gaps, and placing items in a 2D layout.
+
+         Core concepts:
+         - `display: grid` creates a grid container with explicit rows and columns.
+         - `grid-template-columns` controls column track sizes (fractions, px, repeat()).
+         - `grid-template-areas` lets you name areas and place children via `grid-area`.
+         - `gap` controls space between rows and columns.
+
+         Walkthrough:
+         - This example uses `repeat(3, 1fr)` to create three equal-width columns.
+         - `grid-template-areas` maps visual layout to semantic names (header, sidebar).
+
+         Exercises:
+         1) Change columns to `1fr 2fr` to create a wider content column.
+         2) Replace named areas with explicit `grid-column` / `grid-row` values.
+         3) Combine Grid and Flex: place a flex container inside a grid cell.
+
+         When to use Grid vs Flexbox:
+         - Use Grid for 2D layouts (rows + columns).
+         - Use Flexbox for 1D layouts (single row or column).
+      -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+      .container{
+         /* height: 800px; */
+         /* width: 900px; */
+         height: 100vh;
+         width: 100vw;
+         background-color: beige;
+         display: grid;
+         /* grid-template-columns: 300px 300px 300px; */
+         /* grid-template-columns: repeat(3,300px); */
+         /* grid-template-columns: 1fr 1fr 1fr; */
+         grid-template-columns: repeat(3,1fr);
+         /* row-gap: 10px; */
+         /* column-gap: 10px */
+         gap: 10px;
+         grid-template-areas: "header header header" "sidebar content-1 content-1" "sidebar content-2 content-3""footer footer footer";
+      }
+      .child{
+         /* height: 100px; */
+         /* width: 100px; */
+         background-color: lightcoral;
+         /* margin: 10px; */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+      .child1{
+         /* grid-column-start: 1;
+         grid-column-end: 4; */
+         /* grid-column: 1/4; */
+      }
+      /* .child-2{
+         grid-row: 2/4;
+      } */
+       .child{
+         background-color: green;
+       }
+       .header{
+         grid-area: header;;
+       }
+       .sidebar{
+         grid-area: sidebar;
+       }
+       .content-1{
+         grid-area: content-1;
+       }
+       .content-2{
+         grid-area: content-2;
+       } 
+       .content-3{
+         grid-area: content-3;
+       } 
+       .footer{
+         grid-area: footer;
+       }
+
+   </style>
+</head>
+<body>
+   <div class="container">
+         <div class="child header">Header</div>
+         <div class="child sidebar">Sidebar</div>
+         <div class="child content-1">Content -1 </div>
+         <div class="child content-2">Content -2</div>
+         <div class="child content-3">Content -3</div>
+         <div class="child footer">Footer</div>
+   </div>
+   
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IN-DEPTH NOTES (Positioning)
+            Purpose: Demonstrates `position` property values and their effects on
+            layout and stacking.
+
+            Position types:
+            - static: default flow, top/right/bottom/left have no effect.
+            - relative: offset relative to its normal position; space still preserved.
+            - absolute: removed from normal flow; positioned relative to nearest
+               ancestor that has a position other than static.
+            - fixed: removed from flow and fixed relative to the viewport (stays on screen).
+            - sticky: behaves like relative until a threshold, then becomes fixed.
+
+            Walkthrough:
+            - Try each `.childN` by uncommenting its `position` rule to see behavior.
+            - Note how absolute/fixed elements do not affect sibling layout.
+
+            Exercises:
+            1) Wrap a positioned element in a `position: relative` parent and place an
+                absolutely positioned child using `top/left` to learn the coordinate origin.
+            2) Use `z-index` to control stacking of overlapping positioned elements.
+
+            Pitfalls:
+            - `position: absolute` taken out of document flow can cause overlap and
+               unexpected layout issues if not planned.
+    -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+      .container{
+         height: 6000px;
+         width: 800px;
+         background-color: lightblue;
+         margin: 10px;
+      }
+      .child{
+         height: 100px;
+         width: 100%;
+         background-color: red;
+         margin: 10px;
+      }
+      /* .child1{
+         position: static;
+         top: 40px;
+      } */
+       /* .child2{
+         position: relative;
+         top: 50px;
+       } */
+        /* .child3{
+         position: absolute;
+         top: 100px;
+      } */
+            /* .child4{
+               position: fixed;
+               top: 200px;
+            } */
+               .child5{
+                  position: sticky;
+                  top: 0px;
+               }
+
+   </style>
+</head>
+<body>
+   <div class="container">
+      <div class="child child1">Item1</div>
+      <div class="child child2">Item2</div>
+      <div class="child child3">Item3</div>
+      <div class="child child4">Item4</div>
+      <div class="child child5">Item5</div>
+      
+
+   </div>
+</body>
+</html>

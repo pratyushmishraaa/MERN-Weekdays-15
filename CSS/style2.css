@@ -1,3 +1,15 @@
+/* IN-DEPTH: `style2.css` — Reset / Base Styles
+   Purpose: Provide a small CSS reset and base typography styles so that
+   examples behave consistently across browsers.
+
+   Why a reset?
+   - Browsers apply default margins/padding which vary. Resetting removes
+     those differences so layout is predictable.
+
+   Key rule used here:
+   - `box-sizing: border-box` makes width/height include padding and border,
+     simplifying layout math.
+*/
 *{
   margin:0;
   padding:0;

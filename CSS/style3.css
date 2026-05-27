@@ -1,3 +1,11 @@
+/* IN-DEPTH: `style3.css` — Minimal external stylesheet example
+   Purpose: This small file is linked by `index.html` to demonstrate how
+   external CSS interacts with inline and internal styles.
+
+   Try:
+   - Changing `h1 { color: green }` to a more specific selector like
+     `body h1` or `#main h1` and observe specificity effects.
+*/
 h1{
    color: green;
 }

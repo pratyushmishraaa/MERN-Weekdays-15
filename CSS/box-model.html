@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IN-DEPTH NOTES (Box Model)
+            Purpose: Illustrates how content, padding, border and margin determine an
+            element's total size.
+
+            Key concepts:
+            - Content area: the width/height you set.
+            - Padding: space inside the border, increases outer size unless
+               `box-sizing: border-box` is used.
+            - Border: draws around padding + content and adds to element size.
+            - Margin: space outside the border, affects distance between elements.
+
+            Important example here:
+            - `.parent` has width/height 200px and `padding: 20px`. Without
+               `box-sizing: border-box`, the rendered space taken by `.parent` is
+               200px + 2*20px (padding) = 240px (plus borders).
+
+            Exercises:
+            1) Uncomment `box-sizing: border-box` globally and compare widths.
+            2) Add `border: 10px solid black` to `.parent` and recalculate final size.
+            3) Change `.child` to `width: 100%` and observe how padding affects it.
+
+            Common pitfalls:
+            - Forgetting border/padding when doing pixel-perfect layouts.
+            - Mixing % heights with content that doesn't scale — prefer flexbox/grid.
+    -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<style>
+   *{
+      /* margin: 0; */
+      /* padding: 0; */
+      /* box-sizing: border-box; */
+   }
+   .parent{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      padding: 20px;
+   }
+   .child{
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+   }
+</style>
+<body>
+   <div class="parent">
+      <div class="child"></div>
+   
+   </div>
+   
+</body>
+</html>

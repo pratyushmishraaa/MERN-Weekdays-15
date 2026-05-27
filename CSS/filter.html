@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- IN-DEPTH NOTES (CSS Filters)
+         Purpose: Demonstrates visual filter functions that operate on rendered
+         pixels of an element (commonly used on images).
+
+         Filter functions and when to use them:
+         - `blur(px)` : soften details; avoid large values for readability.
+         - `grayscale(%)` : desaturate colors for a muted effect.
+         - `brightness(%)` / `contrast(%)` : adjust tonal range.
+         - `hue-rotate(deg)` : shift all colors around the color wheel.
+         - `sepia(%)` : warm, vintage look.
+         - `drop-shadow(x y blur color)` : similar to box-shadow but on the image's alpha.
+
+         Performance notes:
+         - Filters are GPU-accelerated in most modern browsers but chaining many
+         can still be expensive on low-end devices.
+
+         Exercises:
+         1) Chain `grayscale(60%) blur(2px) brightness(110%)` and observe change.
+         2) Toggle `filter` on hover to create interactive effects.
+         3) Compare `drop-shadow` vs `box-shadow` visually.
+
+         Accessibility note:
+         - Avoid using filters that significantly reduce contrast for important content.
+      -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      img{
+         width: 400px;
+         /* filter: blur(10px); */
+         /* filter: grayscale(70%); */
+         /* filter: blur(5px); */
+/* filter: brightness(150%); */
+/* filter: contrast(200%); */
+/* filter: drop-shadow(16px 16px 20px blue); */
+/* filter: grayscale(50%); */
+/* filter: hue-rotate(180deg); */
+/* filter: invert(75%); */
+/* filter: opacity(25%); */
+/* filter: saturate(30%); */
+/* filter: sepia(60%); */
+      }
+   </style>
+</head>
+<body>
+   <img src="https://images.pexels.com/photos/18864127/pexels-photo-18864127.jpeg" alt="">
+   
+</body>
+</html>
