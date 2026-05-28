@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Meta tags for character encoding and viewport settings for responsive design -->
+   <meta charset="UTF-8">
+   <!-- Viewport meta tag ensures proper rendering on mobile devices:
+        - width=device-width: matches the device's screen width
+        - initial-scale=1.0: initial zoom level is 100% (no zoom on load)
+   -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   
+   <!-- Bootstrap 5.3.8 CSS Framework via CDN (jsDelivr CDN)
+        - Latest version with more components and utilities than 5.0
+        - Includes responsive grid system, components, utilities
+        - Provides ready-made styling for typography, buttons, forms, cards, navbars, etc.
+        - integrity attribute ensures security - validates file hasn't been modified
+        - crossorigin="anonymous" allows cross-origin resource sharing
+   -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+   <!-- TYPOGRAPHY DEMONSTRATIONS (currently commented)
+        Bootstrap provides semantic typography classes for better text styling
+   -->
+   <!-- <h1>This is bootstrap</h1> -->
+   
+   <!-- PARAGRAPH WITH HEADING CLASSES:
+        Bootstrap allows applying heading styles to any element using .h1 through .h6 classes
+        - h1 class: Makes text size equivalent to <h1> but keeps semantic <p> tag
+        - h2 class: Makes text size equivalent to <h2>
+        Useful for styling without changing HTML semantics
+   -->
+    <!-- <p class="h1">Satya</p>
+    <p class="h2">This is h2</p>
+    
+    DISPLAY HEADING CLASSES:
+    - Larger than regular headings (h1-h6)
+    - Used for hero sections, landing pages, prominent text
+    - Range from display-1 (largest) to display-6 (smallest)
+    
+    <p class="display-1">This is display 1</p>
+    <p class="display-2">This is display 2</p>
+    <p class="display-3">This is display 3</p>
+    <p class="display-4">This is display 4</p>
+    <p class="display-5">This is display 5</p>    
+    <p class="display-6">This is display 6</p> -->
+
+    <!-- MARK/HIGHLIGHT UTILITY:
+         - mark class: Applies yellow background highlight to text (like highlighter marker)
+         - Useful for emphasizing important text without using <mark> semantic tag
+    -->
+    <!-- <span class="mark">this is mark</span> -->
+
+    <!-- CONTAINER WITH BACKGROUND COLOR:
+         - container: Creates fixed-width, centered container (responsive width based on breakpoint)
+         - bg-success: Bootstrap utility class applying green background color
+         - mt-5: Margin-top utility class
+         
+         Bootstrap spacing utilities follow pattern: property-value
+         - mt (margin-top), mb (margin-bottom), ml/ms (margin-left), mr/me (margin-right)
+         - pt (padding-top), pb (padding-bottom), pl/ps (padding-left), pr/pe (padding-right)
+         - Values: 0, 1, 2, 3, 4, 5 (correlates to rem units: 0, 0.25rem, 0.5rem, 1rem, 1.5rem, 3rem)
+    -->
+    <!-- <div class="container bg-success mt-5">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vitae sed? Expedita voluptatem delectus atque aut nemo aliquid natus temporibus. Magnam ex exercitationem excepturi voluptate minima natus error doloribus dolorum culpa praesentium! Neque, asperiores.
+    </div> -->
+
+    <!-- DUPLICATE CONTAINER (for testing multiple containers) -->
+    <!-- <div class="container bg-success mt-5">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vitae sed? Expedita voluptatem delectus atque aut nemo aliquid natus temporibus. Magnam ex exercitationem excepturi voluptate minima natus error doloribus dolorum culpa praesentium! Neque, asperiores.
+    </div> -->
+    
+    <!-- IMAGE WITHOUT RESPONSIVE CLASS (removed):
+         - Regular <img> tags don't adapt to screen sizes properly
+         - Could cause layout issues on mobile devices
+    -->
+    <!-- <img src="https://images.pexels.com/photos/33574682/pexels-photo-33574682.jpeg" class="fluid" alt=""> -->
+    
+    <!-- RESPONSIVE IMAGE CONTAINER:
+         - container: Creates fixed-width wrapper
+         - Contains responsive image (active section)
+    -->
+     <div class="container">
+      <!-- RESPONSIVE IMAGE:
+           - img-fluid class: Makes image responsive
+             - Sets max-width: 100% (never larger than container)
+             - Sets height: auto (maintains aspect ratio)
+           - Adapts to different screen sizes automatically
+           - Works on mobile, tablet, desktop without distortion
+           - External image from Pexels (free stock photo service)
+      -->
+      <img  class="img-fluid"
+      src="https://images.pexels.com/photos/33574682/pexels-photo-33574682.jpeg" alt="">
+     </div>
+
+   <!-- BOOTSTRAP KEY CONCEPTS SUMMARY:
+        
+        1. CONTAINER CLASSES:
+           - .container: Fixed-width responsive container
+           - .container-fluid: Full-width container (100% of viewport)
+        
+        2. TYPOGRAPHY:
+           - Heading classes: .h1 through .h6 (apply heading styles to any element)
+           - Display classes: .display-1 through .display-6 (very large headings)
+           - .mark: Yellow highlight background
+        
+        3. UTILITY CLASSES (quick styling without CSS):
+           - Spacing: mt-*, mb-*, ml-*, mr-*, pt-*, pb-*, pl-*, pr-*
+           - Background: bg-primary, bg-success, bg-danger, bg-warning, bg-info, bg-light, bg-dark
+           - Text: text-primary, text-success, text-danger, etc.
+           - Display: d-flex, d-grid, d-block, d-inline, d-none
+           - Alignment: text-center, text-start, text-end
+           - Sizing: w-25, w-50, w-75, w-100, h-25, h-50, h-75, h-100
+        
+        4. RESPONSIVE IMAGES:
+           - .img-fluid: Makes images responsive with max-width: 100% and height: auto
+           - Maintains aspect ratio across all screen sizes
+           - Essential for mobile-friendly designs
+        
+        5. BREAKPOINTS (for responsive design):
+           - XS: <576px (mobile)
+           - SM: ≥576px (landscape mobile)
+           - MD: ≥768px (tablet)
+           - LG: ≥992px (desktop)
+           - XL: ≥1200px (large desktop)
+           - XXL: ≥1400px (extra large)
+   -->
+</body>
+</html>

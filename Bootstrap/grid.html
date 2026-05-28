@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character encoding and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  
+  <!-- Bootstrap 5.0.0-alpha1 CSS Framework via CDN
+       - Provides pre-built CSS classes for responsive grid system, components, and utilities
+       - Bootstrap uses a 12-column grid system for layout
+       - Includes flexbox-based layout, typography, buttons, forms, and more
+       - integrity attribute ensures file hasn't been tampered with -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- BOOTSTRAP CONTAINER & GRID SYSTEM DEMONSTRATION
+     The container class creates a fixed-width wrapper with responsive max-widths:
+     - Extra small (<576px): 100% width
+     - Small (≥576px): 540px
+     - Medium (≥768px): 720px
+     - Large (≥992px): 960px
+     - Extra large (≥1200px): 1140px
+     - XXL (≥1400px): 1320px
+-->
+<div class="container">
+   <!-- ROW CLASS: Creates a horizontal group of columns
+        - Must be inside a container/container-fluid
+        - Uses flexbox to arrange children horizontally
+        - Negative margin on sides offsets container padding for proper alignment
+   -->
+   <div class="row">
+      <!-- EXAMPLE 1 - AUTO-SIZING COLUMNS (currently commented):
+           - Using just "col" class makes columns equally sized
+           - They automatically distribute available space
+           - If 15 items: each gets 1/15 of space (responsive behavior)
+      -->
+      <!-- <div class="col">item-1</div>
+      <div class="col">item-2</div>
+      <div class="col">item-3</div>
+      <div class="col">item-4</div>
+      <div class="col">item-5</div>
+      <div class="col">item-6</div>
+      <div class="col">item-7</div>
+      <div class="col">item-8</div>
+      <div class="col">item-9</div>
+      <div class="col">item-10</div>
+      <div class="col">item-11</div>
+      <div class="col">item-12</div>
+      <div class="col">item-13</div>
+      <div class="col">item-14</div>
+      <div class="col">item-15</div> -->
+      
+      <!-- EXAMPLE 2 - FIXED WIDTH COLUMNS (currently commented):
+           - col-6: takes 6 out of 12 columns (50% width)
+           - col-1: takes 1 out of 12 columns (8.33% width)
+           - Total used: 6 + (12 × col-1) = 18 columns (overflow wraps to next row)
+           - Grid is responsive and works on all screen sizes
+      -->
+      <!-- <div class="col-6">item-1</div>
+      <div class="col-1">item-2</div>
+      <div class="col-1">item-3</div>
+      <div class="col-1">item-4</div>
+      <div class="col-1">item-5</div>
+      <div class="col-1">item-6</div>
+      <div class="col-1">item-7</div>
+      <div class="col-1">item-8</div>
+      <div class="col-1">item-9</div>
+      <div class="col-1">item-10</div>
+      <div class="col-1">item-11</div>
+      <div class="col-1">item-12</div>
+      <div class="col-1">item-13</div> -->
+      
+      <!-- ACTIVE EXAMPLE - FULL-WIDTH RED BOX:
+           - col-12: Takes full 12 columns (100% of row width)
+           - bg-danger: Bootstrap utility class for red background color
+           - Demonstrates how to create full-width sections
+      -->
+      <div class="col-12 bg-danger">Phla Item</div>
+      <!-- COMMENTED EXAMPLES:
+           - col-4: Would take 4/12 columns (33.33% width) with green background
+           - col-5: Would take 5/12 columns (41.66% width) with yellow background
+      -->
+      <!-- <div class="col-4 bg-success">Second Item</div> -->
+      <!-- <div class="col-5 bg-warning">bacha hua</div> -->
+      
+      <!-- NESTED ROW WITH FLEXBOX UTILITIES:
+           - d-flex: Applies display: flex for flexbox layout
+           - flex-column: Changes flex direction to column (vertical stacking)
+           - This creates nested columns within a row
+           - Empty divs can be styled for demonstrations
+      -->
+       <div class="row d-flex flex-column">
+         <!-- Empty divs for layout testing -->
+         <div></div>
+         <div></div>
+       </div>
+   </div>
+</div>
+
+<!-- BOOTSTRAP GRID SYSTEM SUMMARY:
+     - 12-column responsive grid system
+     - Breakpoints: xs, sm (576px), md (768px), lg (992px), xl (1200px), xxl (1400px)
+     - Column classes: col, col-1 through col-12, col-sm-*, col-md-*, etc.
+     - Utilities: bg-danger, d-flex, flex-column, mt-*, mb-*, p-*, etc.
+     - Perfect for creating responsive layouts without custom CSS
+-->
+</body>
+</html>
