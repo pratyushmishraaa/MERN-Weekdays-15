@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <!-- index.html: inline JavaScript example showing script execution order and hoisting behavior -->
+   <script>
+// This example demonstrates how JavaScript handles variable access before declaration.
+// The code below will throw a ReferenceError because `a` is used before the `let` declaration.
+// If this used `var a = 10;` instead, the output would be `undefined` due to hoisting.
+//       var a =10;
+// function double(num){
+//    return num *2 ;
+// }
+
+// var res1 = double(5);
+// console.log(res1);
+// var res2 = double(a);
+// console.log(res2);
+console.log(a);
+let a = 10;
+   </script>
+   
+</body>
+</html>
