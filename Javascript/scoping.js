@@ -30,7 +30,6 @@
 let a =10;
 function outer(){
    function inner(){
-      let a =18;
       console.log(a);
    }
    inner();
