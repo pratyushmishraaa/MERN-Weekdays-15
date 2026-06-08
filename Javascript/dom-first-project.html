@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      .circle{
+         height: 100px;
+         width: 100px;
+         background-color: red;
+         border-radius: 50%;
+         margin: 10px;
+         display: inline-block;
+      }
+      .container{
+         height: 800px;
+         width: 500px;
+         background-color: beige;
+      }
+   </style>
+</head>
+<body>
+   <input type="text" placeholder="Enter the Value" id="num">
+   <button id="btn">Generate</button>
+   <div class="container"></div>
+
+   <script>
+      const btn = document.querySelector("#btn");
+      btn.addEventListener("click",()=>{
+         const input = document.querySelector("#num").value;
+         // console.log(input);
+         for(let i =0 ; i<input;i++){
+            const ele = document.createElement("div");
+            ele.classList.add("circle");
+            document.querySelector(".container").appendChild(ele);
+         }
+      })
+
+   </script>
+   
+</body>
+</html>

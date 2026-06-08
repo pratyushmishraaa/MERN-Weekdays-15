@@ -1,4 +1,4 @@
- function add(){
-//    let a =10;
-//  }
-//  console.log(a);
+let res = arr.map((ele)=>{
+//    return ele*2;
+// })
+// console.log(res);

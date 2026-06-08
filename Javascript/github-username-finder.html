@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <input type="text" placeholder="Enter the username" id="user_input">
+   <button id="btn">Find User</button>
+   <div class="container"></div>
+   
+   <script>
+      const btn = document.querySelector("#btn");
+      btn.addEventListener("click",()=>{
+         const user_input = document.querySelector("#user_input").value;
+         console.log(user_input);
+         if(user_input===""){
+            alert("Please enter the username");
+         }
+         fetch(`https://api.github.com/users/${user_input}`)
+         .then((res)=> res.json())
+         .then((data)=>{
+            console.log(data);
+            const image = document.createElement("img");
+            image.setAttribute("src", data.avatar_url);
+            const name = document.createElement("h2");
+            name.textContent = data.name;
+            const bio = document.createElement("p");
+            bio.textContent = data.bio;
+            const address = document.createElement("h2");
+            address.textContent = data.location;
+            
+
+            document.querySelector(".container").appendChild(image);
+            document.querySelector(".container").appendChild(name);
+            document.querySelector(".container").appendChild(bio);
+            document.querySelector(".container").appendChild(address);
+            
+            
+            
+
+              })
+         .catch((err)=>{
+            console.log(err);
+         })
+      })
+
+   </script>
+</body>
+</html>
