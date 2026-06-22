@@ -1,14 +1,14 @@
 import express from "express";
-import authController from "../controllers/auth.controller";
-import usersController from "../controllers/users.controller";
+import { register } from "../controllers/auth.controller.js";
+import { getAllUsers } from "../controllers/users.controller.js";
 
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/auth/v1", authController);
-app.use("/api/users/v1", usersController);
+app.post("/api/auth/v1/register", register);
+app.get("/api/users/v1", getAllUsers);
 
 
 
