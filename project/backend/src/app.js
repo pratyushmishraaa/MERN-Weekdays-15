@@ -1,15 +1,13 @@
 import express from "express";
-import { login, register } from "../controllers/auth.controller.js";
-import { getAllUsers } from "../controllers/users.controller.js";
+
 
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/api/auth/v1/register", register);
-app.post("/api/auth/v1/login", login);
-app.get("/api/users/v1", getAllUsers);
+
+
 
 
 
