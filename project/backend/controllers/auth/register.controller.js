@@ -1,8 +1,8 @@
-import asyncHandler from "../../utils/asyncHandler.utils";
+import asyncHandler from "../../utils/asyncHandler.utils.js";
 import User from "../../models/user.model.js";
 import bcrypt from "bcryptjs";
 import ApiError from "../../utils/errorHandler.utils.js";
-import {uploadCloudinary} from "../../utils/cloudinary.utils.js";
+import {uploadOnCloudinary} from "../../utils/cloudinary.utils.js";
 import {sendEmail} from "../../utils/email.utils.js";
 
 
@@ -25,7 +25,7 @@ export const register= asyncHandler(async(req,res,next)=>{
 
   console.log("Source for Cloudinary:", sourceToUpload);
 
-  const cloudinaryResponse = await uploadCloudinary(sourceToUpload);
+  const cloudinaryResponse = await uploadOnCloudinary(sourceToUpload);
   console.log("Cloudinary Response:", cloudinaryResponse);
 
   if(cloudinaryResponse){
