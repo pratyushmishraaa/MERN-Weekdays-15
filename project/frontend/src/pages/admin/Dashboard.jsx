@@ -35,6 +35,28 @@ const Spinner = () => (
   </div>
 );
 
+const DashboardSkeleton = () => (
+  <div className="space-y-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div key={index} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 animate-pulse">
+          <div className="h-12 w-12 rounded-2xl bg-gray-100 mb-4" />
+          <div className="h-3 w-20 bg-gray-100 rounded-full mb-2" />
+          <div className="h-7 w-24 bg-gray-100 rounded-full" />
+        </div>
+      ))}
+    </div>
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6">
+      <div className="h-4 w-32 bg-gray-100 rounded-full mb-4" />
+      <div className="space-y-3">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div key={index} className="h-10 bg-gray-100 rounded-xl" />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const Dashboard = () => {
   // Safe fallback if useAuth() or authFetch is missing during context setup
   const authContext = useAuth();
@@ -110,7 +132,7 @@ const Dashboard = () => {
       </div>
 
       {loading ? (
-        <Spinner />
+        <DashboardSkeleton />
       ) : error ? (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
           {error} (Verify your <code>AuthContext</code> contains <code>authFetch</code>)

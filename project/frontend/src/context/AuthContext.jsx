@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../store/cartSlice";
-import api, { setAuthToken } from "../utils/api";
+import api, { request, setAuthToken } from "../utils/api";
 
 const AuthContext = createContext();
 
@@ -62,18 +62,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const authFetch = async (url, options = {}) => {
-    const tokenValue = readStoredValue("token");
-    const headers = new Headers(options.headers || {});
-
-    if (tokenValue) {
-      headers.set("Authorization", `Bearer ${tokenValue}`);
-    }
-
-    return fetch(url, {
-      ...options,
-      headers,
-      credentials: "include",
-    });
+    return request(url, options);
   };
 
   const register = async ({ username, email, password, role = "user", avatar }) => {
@@ -87,10 +76,9 @@ export const AuthProvider = ({ children }) => {
       formData.append("avatar", avatar);
     }
 
-    const response = await fetch("/api/auth/v1/register", {
+    const response = await request("/api/auth/v1/register", {
       method: "POST",
       body: formData,
-      credentials: "include",
     });
 
     const data = await response.json().catch(() => ({}));

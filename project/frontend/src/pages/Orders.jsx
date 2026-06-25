@@ -39,6 +39,19 @@ const Spinner = () => (
   </div>
 );
 
+const OrderSkeleton = () => (
+  <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 animate-pulse">
+    <div className="flex items-center gap-4">
+      <div className="w-11 h-11 rounded-xl bg-gray-100 dark:bg-gray-800" />
+      <div className="flex-1 space-y-2">
+        <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full w-2/3" />
+        <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full w-1/2" />
+      </div>
+      <div className="w-20 h-6 bg-gray-100 dark:bg-gray-800 rounded-full" />
+    </div>
+  </div>
+);
+
 // ─── Order timeline component ─────────────────────────────────────────────────
 const OrderTimeline = ({ orderStatus, paymentStatus }) => {
   const isCancelled = orderStatus === "cancelled";
@@ -338,7 +351,13 @@ const Orders = () => {
           </Link>
         </div>
 
-        {loading && <Spinner />}
+        {loading && (
+          <div className="space-y-4">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <OrderSkeleton key={index} />
+            ))}
+          </div>
+        )}
         {error && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 text-red-700 text-sm rounded-2xl px-5 py-4 flex items-center gap-3">
             <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">

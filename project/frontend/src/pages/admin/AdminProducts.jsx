@@ -21,6 +21,22 @@ const Spinner = ({ sm }) => (
   <div className={`border-2 border-white border-t-transparent rounded-full animate-spin ${sm ? "w-4 h-4" : "w-8 h-8 border-indigo-500 border-t-transparent"}`} />
 );
 
+const TableSkeleton = () => (
+  <div className="divide-y divide-gray-50">
+    {Array.from({ length: 6 }).map((_, index) => (
+      <div key={index} className="flex items-center gap-4 px-5 py-3.5 animate-pulse">
+        <div className="w-11 h-11 rounded-xl bg-gray-100" />
+        <div className="flex-1 space-y-2">
+          <div className="h-3 w-32 bg-gray-100 rounded-full" />
+          <div className="h-3 w-24 bg-gray-100 rounded-full" />
+        </div>
+        <div className="h-3 w-16 bg-gray-100 rounded-full" />
+        <div className="h-3 w-12 bg-gray-100 rounded-full" />
+      </div>
+    ))}
+  </div>
+);
+
 const STATUS_BADGE = (stock) =>
   stock > 10 ? "bg-emerald-100 text-emerald-700" :
   stock > 0  ? "bg-yellow-100 text-yellow-700"   : "bg-red-100 text-red-600";
@@ -160,7 +176,7 @@ const AdminProducts = () => {
       {/* Table */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         {loading ? (
-          <div className="flex h-48 items-center justify-center"><Spinner /></div>
+          <TableSkeleton />
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-48 gap-2 text-gray-400">
             <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5" /></svg>

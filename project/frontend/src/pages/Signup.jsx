@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 
 const Field = ({ label, name, type = "text", placeholder, autoComplete, value, onChange, error }) => (
   <div className="flex flex-col gap-1">
@@ -16,6 +17,7 @@ const Field = ({ label, name, type = "text", placeholder, autoComplete, value, o
 const Signup = () => {
   const { register, login, isLoggedIn, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [form, setForm] = useState({ username: "", email: "", password: "", confirmPassword: "", role: "user" });
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
@@ -52,12 +54,14 @@ const Signup = () => {
     try {
       await register({ username: form.username.trim(), email: form.email.trim(), password: form.password, role: form.role, avatar });
       const user = await login({ email: form.email.trim(), password: form.password });
+      addToast("Account created successfully", "success");
       navigate(user?.role === "admin" ? "/admin" : "/", { replace: true });
     } catch (err) {
       const msg = err.message || "";
       if (msg.toLowerCase().includes("already exists") || msg.toLowerCase().includes("already registered")) {
         setServerError("An account with this email or username already exists."); setAlreadyExists(true);
       } else { setServerError(msg); }
+      addToast(msg || "Signup failed", "error");
     } finally { setLoading(false); }
   };
 

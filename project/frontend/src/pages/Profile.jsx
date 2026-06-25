@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import api from "../utils/api";
+import { useToast } from "../context/ToastContext";
 
 const Profile = () => {
   const { user, logout, updateUserInContext, loading: authLoading, authFetch } = useAuth();
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const fileRef  = useRef();
 
   const [username,        setUsername]        = useState(user?.username || "");
@@ -63,8 +65,11 @@ const Profile = () => {
       setAvatarFile(null);
       setAvatarPreview(null);
       setSuccess("Profile updated successfully!");
+      addToast("Profile updated successfully", "success");
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      const message = err.response?.data?.message || err.message || "Profile update failed";
+      setError(message);
+      addToast(message, "error");
     } finally {
       setSaving(false);
     }
@@ -74,10 +79,13 @@ const Profile = () => {
     setDeleting(true);
     try {
       await api.delete("/api/users/v1/deleteprofile");
+      addToast("Account deleted successfully", "info");
       logout();
       navigate("/", { replace: true });
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      const message = err.response?.data?.message || err.message;
+      setError(message);
+      addToast(message || "Account deletion failed", "error");
       setDeleting(false);
     }
   };
@@ -99,9 +107,12 @@ const Profile = () => {
         newPassword: pwForm.newPw,
       });
       setPwSuccess("Password changed successfully!");
+      addToast("Password changed successfully", "success");
       setPwForm({ current: "", newPw: "", confirm: "" });
     } catch (err) {
-      setPwError(err.response?.data?.message || err.message);
+      const message = err.response?.data?.message || err.message;
+      setPwError(message);
+      addToast(message || "Password update failed", "error");
     } finally {
       setPwSaving(false);
     }

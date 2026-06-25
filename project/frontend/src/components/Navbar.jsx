@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -8,6 +8,9 @@ import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
   const [profileOpen,    setProfileOpen]    = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const profileRef = useRef(null);
+  const mobileMenuRef = useRef(null);
   const { searchQuery, setSearchQuery } = useSearch();
   const { isLoggedIn, isAdmin, user, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
@@ -16,6 +19,44 @@ const Navbar = () => {
   const cartCount = useSelector((s) =>
     s.cart.items.reduce((sum, i) => sum + i.quantity, 0)
   );
+
+  useEffect(() => {
+    setSearchInput(searchQuery);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setSearchQuery(searchInput);
+    }, 250);
+
+    return () => window.clearTimeout(timer);
+  }, [searchInput, setSearchQuery]);
+
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setProfileOpen(false);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const handleLogout = () => { logout(); setProfileOpen(false); navigate("/"); };
 
@@ -44,13 +85,14 @@ const Navbar = () => {
               </svg>
               <input
                 type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search products, categories…"
+                aria-label="Search products"
                 className="w-full bg-gray-100 dark:bg-gray-800 border border-transparent focus:border-indigo-400 dark:focus:border-indigo-500 rounded-xl pl-9 pr-4 py-2 text-sm text-gray-700 dark:text-gray-200 placeholder-gray-400 outline-none focus:bg-white dark:focus:bg-gray-900 transition-all"
               />
-              {searchQuery && (
-                <button onClick={() => setSearchQuery("")}
+              {searchInput && (
+                <button onClick={() => { setSearchInput(""); setSearchQuery(""); }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -66,7 +108,8 @@ const Navbar = () => {
             {/* Theme toggle */}
             <button onClick={toggleTheme}
               className="p-2 rounded-xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition-all"
-              title={isDark ? "Light mode" : "Dark mode"}>
+              title={isDark ? "Light mode" : "Dark mode"}
+              aria-label="Toggle theme">
               {isDark
                 ? <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" /></svg>
                 : <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>
@@ -90,9 +133,11 @@ const Navbar = () => {
             <div className="w-px h-5 bg-gray-200 dark:bg-gray-700 mx-1" />
 
             {/* Profile */}
-            <div className="relative">
+            <div className="relative" ref={profileRef}>
               <button onClick={() => setProfileOpen(p => !p)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                aria-expanded={profileOpen}
+                aria-label="Open account menu">
                 <div className="w-7 h-7 rounded-full overflow-hidden bg-linear-to-br from-indigo-400 to-indigo-600 flex items-center justify-center shrink-0 ring-2 ring-white dark:ring-gray-950">
                   {isLoggedIn && user?.avatar
                     ? <img src={user.avatar} alt={user.username} className="w-full h-full object-cover" />
@@ -208,7 +253,7 @@ const Navbar = () => {
 
       {/* ── Mobile menu ── */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950">
+        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950" ref={mobileMenuRef}>
           <div className="px-4 py-3 flex flex-col gap-1">
             {isLoggedIn ? (
               <>

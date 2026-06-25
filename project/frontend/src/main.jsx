@@ -6,6 +6,7 @@ import { store, persistor } from "./store/store";
 import { AuthProvider } from "./context/AuthContext";
 import { SearchProvider } from "./context/SearchContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ToastProvider } from "./context/ToastContext";
 import "./index.css";
 import App from "./App.jsx";
 
@@ -20,7 +21,9 @@ createRoot(document.getElementById("root")).render(
           <AuthProvider>
             {/* Search context — global search query shared between Navbar and Products */}
             <SearchProvider>
-              <App />
+              <ToastProvider>
+                <App />
+              </ToastProvider>
             </SearchProvider>
           </AuthProvider>
         </ThemeProvider>

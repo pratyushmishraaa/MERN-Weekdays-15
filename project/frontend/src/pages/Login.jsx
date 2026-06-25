@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { addToast } = useToast();
 
   const [form, setForm] = useState({
     email: "",
@@ -35,14 +37,12 @@ const Login = () => {
       setLoading(true);
 
       await login(form.email, form.password);
-
+      addToast("Signed in successfully", "success");
       navigate("/");
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-        err.message ||
-        "Login failed"
-      );
+      const message = err.response?.data?.message || err.message || "Login failed";
+      setError(message);
+      addToast(message, "error");
     } finally {
       setLoading(false);
     }
