@@ -8,10 +8,6 @@ dotenv.config({ path: "./env/.env" });
 const seedProducts = async ()=>{
    try{
       await connectDB();
-      //clear existing product 
-      await Product.deleteMany();
-      console.log("Existing Product Cleared");
-
       //insert product      
       console.log("Fetching product from an API");
       const response = await fetch("https://dummyjson.com/products");

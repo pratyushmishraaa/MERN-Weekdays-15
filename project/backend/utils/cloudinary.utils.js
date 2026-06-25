@@ -1,44 +1,36 @@
-import cloudinary from "../config/cloudinary.config.js";
+import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-/**
- * Uploads a local file to Cloudinary and removes the local file afterwards.
- * @param {string} localFilePath - Path to the local file.
- * @returns {Promise<object|null>} - Cloudinary upload response or null.
- */
+// Apply config here — at function call time, env vars are guaranteed to be loaded
+const configureCloudinary = () => {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:    process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+};
+
 export const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null;
-
-    // Upload the file to Cloudinary
+    configureCloudinary();
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
     });
-
-    // Only remove the file if it exists locally (not a URL)
-    if (fs.existsSync(localFilePath)) {
-      fs.unlinkSync(localFilePath);
-    }
+    if (fs.existsSync(localFilePath)) fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
-    // Remove the local file even if upload fails
-    if (fs.existsSync(localFilePath)) {
-      fs.unlinkSync(localFilePath);
-    }
+    if (fs.existsSync(localFilePath)) fs.unlinkSync(localFilePath);
     console.error("Cloudinary upload error:", error);
     return null;
   }
 };
 
-/**
- * Deletes a file from Cloudinary.
- * @param {string} publicId - Cloudinary public ID of the resource.
- */
 export const deleteFromCloudinary = async (publicId) => {
   try {
     if (!publicId) return null;
-    const response = await cloudinary.uploader.destroy(publicId);
-    return response;
+    configureCloudinary();
+    return await cloudinary.uploader.destroy(publicId);
   } catch (error) {
     console.error("Cloudinary deletion error:", error);
     return null;

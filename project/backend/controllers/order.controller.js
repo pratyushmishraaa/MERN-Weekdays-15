@@ -127,7 +127,28 @@ export const deleteOrder = asyncHandler(async (req, res) => {
   });
 });
 
-// Verify Payment
+// Cancel Order (User — only their own processing orders)
+export const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (!order) throw new ApiError(404, "Order not found");
+
+  if (order.user.toString() !== req.user._id.toString()) {
+    throw new ApiError(403, "Not authorized to cancel this order");
+  }
+  if (order.orderStatus === "delivered" || order.orderStatus === "cancelled") {
+    throw new ApiError(400, `Cannot cancel an order that is already "${order.orderStatus}"`);
+  }
+
+  order.orderStatus = "cancelled";
+  await order.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Order cancelled successfully",
+    data: order,
+  });
+});
 export const verifyPayment = asyncHandler(async (req, res) => {
   const { razorpayOrderId, razorpayPaymentId, razorpaySignature } = req.body;
 
