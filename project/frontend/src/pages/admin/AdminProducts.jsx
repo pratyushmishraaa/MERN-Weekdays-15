@@ -45,14 +45,17 @@ const AdminProducts = () => {
   const fetchProducts = async () => {
     try {
       const r = await authFetch("/api/products/v1/");
-      const d = await r.json();
-      setProducts(d.data || []);
-      setFiltered(d.data || []);
+      const raw = await r.text();
+      const d = raw ? JSON.parse(raw) : {};
+      if (!r.ok) throw new Error(d.message || "Failed to fetch products");
+      const items = d.data || [];
+      setProducts(items);
+      setFiltered(items);
     } catch (e) { setError(e.message); }
     finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => { fetchProducts(); }, [authFetch]);
 
   useEffect(() => {
     const q = search.toLowerCase();
@@ -101,7 +104,8 @@ const AdminProducts = () => {
       const url    = editId ? `/api/products/v1/${editId}` : "/api/products/v1/";
       const method = editId ? "PUT" : "POST";
       const res    = await authFetch(url, { method, body: fd });
-      const data   = await res.json();
+      const raw    = await res.text();
+      const data   = raw ? JSON.parse(raw) : {};
       if (!res.ok) throw new Error(data.message || "Save failed");
       closeModal();
       fetchProducts();
@@ -113,8 +117,13 @@ const AdminProducts = () => {
     if (!window.confirm("Permanently delete this product?")) return;
     setDeleting(id);
     try {
-      await authFetch(`/api/products/v1/${id}`, { method: "DELETE" });
+      const res = await authFetch(`/api/products/v1/${id}`, { method: "DELETE" });
+      const raw = await res.text();
+      const data = raw ? JSON.parse(raw) : {};
+      if (!res.ok) throw new Error(data.message || "Delete failed");
       setProducts(prev => prev.filter(p => p._id !== id));
+    } catch (err) {
+      setError(err.message);
     } finally { setDeleting(null); }
   };
 

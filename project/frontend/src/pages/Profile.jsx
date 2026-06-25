@@ -51,13 +51,9 @@ const Profile = () => {
       fd.append("username", username.trim());
       if (avatarFile) fd.append("avatar", avatarFile);
 
-      const res = await authFetch("/api/users/v1/updateprofile", {
-        method: "PUT",
-        body: fd,
+      const { data } = await api.put("/api/users/v1/updateprofile", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Profile update failed");
 
       updateUserInContext({
         username: data.data.username,

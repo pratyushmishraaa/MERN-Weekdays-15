@@ -274,7 +274,7 @@ const Orders = () => {
       try {
         const res  = await authFetch("/api/orders/v1/my-orders");
         const raw  = await res.text();
-        const data = JSON.parse(raw);
+        const data = raw ? JSON.parse(raw) : {};
         if (!res.ok) throw new Error(data.message || "Failed to fetch orders");
         // Sort newest first
         const sorted = (data.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -286,7 +286,7 @@ const Orders = () => {
       }
     };
     fetchOrders();
-  }, []);
+  }, [authFetch]);
 
   const handleExpand = (id) => setExpanded(prev => prev === id ? null : id);
 

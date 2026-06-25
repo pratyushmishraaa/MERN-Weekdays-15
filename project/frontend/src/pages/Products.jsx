@@ -38,18 +38,31 @@ const Products = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
+    let active = true;
+
     const load = async () => {
       try {
-        const { data } = await api.get("/api/products/v1/");
-        if (!data.success) throw new Error(data.message || "Failed to load products");
-        const list = data.data || [];
+        const response = await api.get("/api/products/v1/");
+        const payload = response?.data ?? {};
+        if (!payload.success) throw new Error(payload.message || "Failed to load products");
+
+        const list = Array.isArray(payload.data) ? payload.data : [];
+        if (!active) return;
+
         setProducts(list);
-        const top = Math.ceil(Math.max(...list.map(p => p.price), 0) / 100) * 100 || 10000;
-        setPriceMax(top); setMaxPrice(top);
-      } catch (e) { setError(e.response?.data?.message || e.message); }
-      finally { setLoading(false); }
+        const top = Math.ceil(Math.max(...list.map((p) => Number(p.price) || 0), 0) / 100) * 100 || 10000;
+        setPriceMax(top);
+        setMaxPrice(top);
+      } catch (e) {
+        if (!active) return;
+        setError(e.response?.data?.message || e.message || "Failed to load products");
+      } finally {
+        if (active) setLoading(false);
+      }
     };
+
     load();
+    return () => { active = false; };
   }, []);
 
   const categories = useMemo(() => {

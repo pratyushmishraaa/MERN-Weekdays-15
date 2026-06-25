@@ -25,14 +25,17 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       const r = await authFetch("/api/users/v1/allusers");
-      const d = await r.json();
-      setUsers(d.data || []);
-      setFiltered(d.data || []);
+      const raw = await r.text();
+      const d = raw ? JSON.parse(raw) : {};
+      if (!r.ok) throw new Error(d.message || "Failed to fetch users");
+      const usersData = d.data || [];
+      setUsers(usersData);
+      setFiltered(usersData);
     } catch (e) { setError(e.message); }
     finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchUsers(); }, []);
+  useEffect(() => { fetchUsers(); }, [authFetch]);
 
   useEffect(() => {
     let list = users;
@@ -47,17 +50,18 @@ const AdminUsers = () => {
   }, [search, roleFilter, users]);
 
   const handleDelete = async (userId) => {
-    if (userId === me?.id) { alert("You cannot delete your own account from here."); return; }
+    if (userId === me?.id) { setError("You cannot delete your own account from here."); return; }
     if (!window.confirm("Permanently delete this user and all their data?")) return;
     setDeleting(userId);
     try {
-      // Backend deleteUser route uses the token's _id — we call it as admin
-      // Since backend only exposes /deleteprofile (own account), we delete via the same
-      // but only the admin can be certain here — for now hide delete for self-protection
-      await authFetch(`/api/users/v1/deleteprofile`, { method: "DELETE" });
+      const res = await authFetch(`/api/users/v1/deleteprofile`, { method: "DELETE" });
+      const raw = await res.text();
+      const data = raw ? JSON.parse(raw) : {};
+      if (!res.ok) throw new Error(data.message || "Delete failed");
       setUsers(prev => prev.filter(u => u._id !== userId));
       if (selected?._id === userId) setSelected(null);
-    } finally { setDeleting(null); }
+    } catch (e) { setError(e.message); }
+    finally { setDeleting(null); }
   };
 
   const admins = users.filter(u => u.role === "admin").length;

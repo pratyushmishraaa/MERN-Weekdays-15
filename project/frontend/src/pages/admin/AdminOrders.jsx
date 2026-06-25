@@ -37,7 +37,9 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     try {
       const r = await authFetch("/api/orders/v1/all");
-      const d = await r.json();
+      const raw = await r.text();
+      const d = raw ? JSON.parse(raw) : {};
+      if (!r.ok) throw new Error(d.message || "Failed to fetch orders");
       const data = d.data || [];
       setOrders(data);
       setFiltered(data);
@@ -45,7 +47,7 @@ const AdminOrders = () => {
     finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchOrders(); }, []);
+  useEffect(() => { fetchOrders(); }, [authFetch]);
 
   useEffect(() => {
     let list = orders;
@@ -70,11 +72,12 @@ const AdminOrders = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ [field]: value }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+      const raw = await res.text();
+      const data = raw ? JSON.parse(raw) : {};
+      if (!res.ok) throw new Error(data.message || "Update failed");
       setOrders(prev => prev.map(o => o._id === orderId ? data.data : o));
       if (selected?._id === orderId) setSelected(data.data);
-    } catch (e) { alert(e.message); }
+    } catch (e) { setError(e.message); }
     finally { setUpdating(null); }
   };
 
@@ -82,10 +85,14 @@ const AdminOrders = () => {
     if (!window.confirm("Permanently delete this order?")) return;
     setDeleting(orderId);
     try {
-      await authFetch(`/api/orders/v1/delete/${orderId}`, { method: "DELETE" });
+      const res = await authFetch(`/api/orders/v1/delete/${orderId}`, { method: "DELETE" });
+      const raw = await res.text();
+      const data = raw ? JSON.parse(raw) : {};
+      if (!res.ok) throw new Error(data.message || "Delete failed");
       setOrders(prev => prev.filter(o => o._id !== orderId));
       if (selected?._id === orderId) setSelected(null);
-    } finally { setDeleting(null); }
+    } catch (e) { setError(e.message); }
+    finally { setDeleting(null); }
   };
 
   const revenue = orders

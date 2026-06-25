@@ -5,17 +5,33 @@ import api, { setAuthToken } from "../utils/api";
 
 const AuthContext = createContext();
 
+const readStoredValue = (key) => {
+  if (typeof window === "undefined") return null;
+
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const readStoredUser = () => {
+  const storedUser = readStoredValue("user");
+  if (!storedUser) return null;
+
+  try {
+    return JSON.parse(storedUser);
+  } catch {
+    localStorage.removeItem("user");
+    return null;
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
-
-  const [token, setToken] = useState(
-    localStorage.getItem("token") || null
-  );
-
+  const [user, setUser] = useState(readStoredUser);
+  const [token, setToken] = useState(readStoredValue("token") || null);
   const [loading, setLoading] = useState(false);
 
   const updateUserInContext = (updatedUser) => {
@@ -26,12 +42,31 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const persistAuth = (userData, tokenValue) => {
+    setUser(userData);
+    setToken(tokenValue);
+
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("user");
+    }
+
+    if (tokenValue) {
+      localStorage.setItem("token", tokenValue);
+    } else {
+      localStorage.removeItem("token");
+    }
+
+    setAuthToken(tokenValue);
+  };
+
   const authFetch = async (url, options = {}) => {
-    const token = localStorage.getItem("token");
+    const tokenValue = readStoredValue("token");
     const headers = new Headers(options.headers || {});
 
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+    if (tokenValue) {
+      headers.set("Authorization", `Bearer ${tokenValue}`);
     }
 
     return fetch(url, {
@@ -41,24 +76,47 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const login = async (email, password) => {
+  const register = async ({ username, email, password, role = "user", avatar }) => {
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("role", role);
+
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
+
+    const response = await fetch("/api/auth/v1/register", {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.message || "Registration failed");
+    }
+
+    return data;
+  };
+
+  const login = async (emailOrPayload, password) => {
     try {
       setLoading(true);
 
-      const { data } = await api.post("/api/auth/v1/login", {
-        email,
-        password,
-      });
+      const payload = typeof emailOrPayload === "string"
+        ? { email: emailOrPayload, password }
+        : emailOrPayload;
 
-      setUser(data.user);
-      setToken(data.token);
+      const { data } = await api.post("/api/auth/v1/login", payload);
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
-
-      setAuthToken(data.token);
+      persistAuth(data.user, data.token);
 
       return data.user;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || error.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -66,14 +124,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     dispatch(clearCart());
-
-    setUser(null);
-    setToken(null);
-
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-
-    setAuthToken(null);
+    persistAuth(null, null);
   };
 
   const isLoggedIn = !!user;
@@ -86,6 +137,7 @@ export const AuthProvider = ({ children }) => {
         token,
         loading,
         login,
+        register,
         logout,
         updateUserInContext,
         authFetch,

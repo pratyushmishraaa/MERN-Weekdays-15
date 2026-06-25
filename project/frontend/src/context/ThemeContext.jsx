@@ -1,21 +1,46 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useLayoutEffect } from "react";
 
 const ThemeContext = createContext(null);
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("shopx-theme") || "light"
-  );
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return "light";
 
-  // Apply / remove the "dark" class on <html> whenever theme changes
+  try {
+    const storedTheme = window.localStorage.getItem("shopx-theme");
+    if (storedTheme === "dark" || storedTheme === "light") return storedTheme;
+
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+  } catch {
+    // fall back to light mode
+  }
+
+  return "light";
+};
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const isDark = theme === "dark";
+
+    root.classList.toggle("dark", isDark);
+    root.style.colorScheme = isDark ? "dark" : "light";
+    document.body.style.backgroundColor = isDark ? "#030712" : "#f9fafb";
+    document.body.style.color = isDark ? "#f9fafb" : "#111827";
+
+    try {
+      window.localStorage.setItem("shopx-theme", theme);
+    } catch {
+      // ignore storage errors
+    }
+  }, [theme]);
+
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("shopx-theme", theme);
+    root.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
   const toggleTheme = () =>

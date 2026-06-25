@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../store/cartSlice";
 import { Link } from "react-router-dom";
@@ -265,6 +265,11 @@ const PaymentStep = ({ shipping, items, totalPrice, onSuccess, onBack, onError }
   const [loading, setLoading] = useState(false);
   const { authFetch } = useAuth();
 
+  if (typeof authFetch !== "function") {
+    onError("Authentication utility is unavailable. Please log in again.");
+    return null;
+  }
+
   const loadRazorpayScript = () =>
     new Promise((resolve) => {
       if (window.Razorpay) return resolve(true);
@@ -295,8 +300,10 @@ const PaymentStep = ({ shipping, items, totalPrice, onSuccess, onBack, onError }
           shippingAddress: {
             fullName: shipping.fullName,
             email: shipping.email,
+            phone: shipping.phone,
             address: shipping.address,
             city: shipping.city,
+            state: shipping.state,
             zip: shipping.zip,
             country: shipping.country,
           },
@@ -513,16 +520,44 @@ const Checkout = () => {
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
     .toFixed(2);
 
-  const [shipping, setShipping] = useState({
-    fullName: user?.username || "",
-    email:    user?.email    || "",
-    phone:    "",
-    address:  "",
-    city:     "",
-    state:    "",
-    zip:      "",
-    country:  "India",
+  const getStoredShipping = () => {
+    if (typeof window === "undefined") return null;
+
+    try {
+      const saved = window.localStorage.getItem("checkout-shipping");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const [shipping, setShipping] = useState(() => {
+    const saved = getStoredShipping();
+    return {
+      fullName: saved?.fullName || user?.username || "",
+      email:    saved?.email    || user?.email    || "",
+      phone:    saved?.phone    || "",
+      address:  saved?.address  || "",
+      city:     saved?.city     || "",
+      state:    saved?.state    || "",
+      zip:      saved?.zip      || "",
+      country:  saved?.country  || "India",
+    };
   });
+
+  useEffect(() => {
+    setShipping((prev) => ({
+      ...prev,
+      fullName: prev.fullName || user?.username || "",
+      email: prev.email || user?.email || "",
+    }));
+  }, [user?.username, user?.email]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("checkout-shipping", JSON.stringify(shipping));
+    }
+  }, [shipping]);
 
   const handleShippingChange = (field, value) =>
     setShipping((prev) => ({ ...prev, [field]: value }));
