@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config({ path: "./env/.env" });
 
+// Disable Mongoose command buffering.
+// This ensures that if the database is not connected, Mongoose throws the actual connection error
+// immediately instead of waiting for 10 seconds and throwing a generic buffering timeout.
+mongoose.set("bufferCommands", false);
+
 const connectDB = async (retries = 3, delay = 2000) => {
   // If we already have a connection, reuse it
   if (mongoose.connection.readyState === 1) {
