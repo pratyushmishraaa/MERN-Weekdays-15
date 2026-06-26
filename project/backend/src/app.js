@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
+import connectDB from "../config/db.config.js";
 import authRouter from "../routes/auth.routes.js";
 import usersRouter from "../routes/users.routes.js";
 import ordersRouter from "../routes/order.routes.js";
@@ -25,6 +26,16 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Database connection middleware to ensure connection on each request
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // API routes
 app.use("/api/auth/v1", authRouter);
